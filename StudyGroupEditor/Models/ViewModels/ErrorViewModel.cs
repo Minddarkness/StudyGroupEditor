@@ -1,4 +1,4 @@
-namespace StudyGroupEditor.Models;
+namespace StudyGroupEditor.Models.ViewModels;
 
 public class ErrorViewModel
 {
