@@ -14,6 +14,7 @@
 4.	Добавление студента в учебную группу
 
 Логика перехода по страницам
+
 ![image](https://github.com/Minddarkness/StudyGroupEditor/assets/25738638/83d6d6d5-7655-4da0-8ff5-e6352a6e767a)
  
 Основной сценарий
