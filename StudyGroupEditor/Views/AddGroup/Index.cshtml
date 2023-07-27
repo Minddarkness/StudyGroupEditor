@@ -1,0 +1,18 @@
+
+@model StudyGroupEditor.Models.ViewModels.CreatePageModel
+
+<h2>Создать учебную группу</h2>
+<form asp-action="CreateGroup" asp-controller="AddGroup">
+    <p>
+        <label asp-for="Group.TeacherId">Преподаватель</label><br />
+        @* <input type="text" asp-for="Teacher" /> *@
+        <select asp-for="Group.TeacherId" asp-items="Model.TeachersSelectList"></select>
+    </p>
+    <p>
+        <label asp-for="Group.Name">Название учебной группы</label><br />
+        <input type="text" asp-for="Group.Name" />
+    </p>
+    <p>
+        <input type="submit" value="Создать"/>
+    </p>
+</form>

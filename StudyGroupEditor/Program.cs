@@ -8,10 +8,8 @@ string connection = builder.Configuration.GetConnectionString("DefaultConnection
  
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
 builder.Services.AddDbContext<UniversityContext>(options => options.UseSqlServer(connection));
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

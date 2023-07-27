@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using StudyGroupEditor.Models;
+using Microsoft.EntityFrameworkCore;
 using StudyGroupEditor.Models.DatabaseModels;
 using StudyGroupEditor.Models.ViewModels;
 
@@ -17,15 +17,24 @@ public class HomeController : Controller
         _universityContext = universityContext;
     }
     
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var groups = 
+            await _universityContext.Groups.Include(g => g.Teacher).ToListAsync();
+        return View(groups);
     }
 
-    public IActionResult Privacy()
+    public IActionResult AddGroup()
     {
-        return View();
+        return RedirectToAction("Index", "AddGroup");
     }
+    
+
+    
+    // public IActionResult Privacy()
+    // {
+    //     return View();
+    // }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

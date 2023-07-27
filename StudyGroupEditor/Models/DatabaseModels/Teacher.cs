@@ -14,4 +14,11 @@ public class Teacher
         Organizations = new List<Organization>();
         Groups = new List<Group>();
     }
+
+    public Teacher(int teacherId, string name, string email) : this()
+    {
+        TeacherId = teacherId;
+        Name = name;
+        Email = email;
+    }
 }

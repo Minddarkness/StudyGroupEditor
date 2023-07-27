@@ -10,4 +10,9 @@ public class Organization
     public Teacher Teacher { get; set; }
     
     public ICollection<Employee> Employees { get; set; }
+    
+    public Organization()
+    {
+        Employees = new List<Employee>();
+    }
 }

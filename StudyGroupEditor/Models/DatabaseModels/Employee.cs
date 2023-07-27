@@ -9,4 +9,9 @@ public class Employee
     public Organization Organization { get; set; }
     
     public ICollection<Group> Groups { get; set; }
+    
+    public Employee()
+    {
+        Groups = new List<Group>();
+    }
 }
