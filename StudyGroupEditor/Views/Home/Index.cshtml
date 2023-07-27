@@ -19,12 +19,12 @@
                 <td>@item.Name</td>
                 <td>@item.Teacher.Name</td>
                 <td>@item.Employees.Count</td>
-                <td>Редактировать</td>
+                
+                <td> <form method="post">
+                        <a asp-action="Edit" asp-route-id="@item.GroupId">Редактировать</a>
+                    </form></td>
             </tr>
         }
     </table>
-    <p><a asp-action="AddGroup">Добавить группу</a></p>
-    @* <p> *@
-    @*     <input onclick="Create" type="button" value="Добавить группу" /> *@
-    @* </p> *@
+    <button type="button" class="btn" onclick="window.location.href = '/AddGroup'">Добавить группу</button>
 </div>

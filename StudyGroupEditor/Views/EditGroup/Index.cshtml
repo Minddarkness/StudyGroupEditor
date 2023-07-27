@@ -1,0 +1,22 @@
+@* @model StudyGroupEditor.Models.ViewModels.EditGroupModel *@
+@model StudyGroupEditor.Models.DatabaseModels.Group
+<h1 class="display-4">Создать учебную группу</h1>
+<h2>Учебные группы > Создать учебную группу</h2>
+    <p>
+        <label> @("Название учебной группы: " + Model.Name) </label><br/>
+    </p>
+<form asp-action="EditGroupName" method="post" asp-controller="EditGroup" asp-route-id="@Model.GroupId">
+    <input type="hidden" asp-for="GroupId" />
+    <input type="hidden" asp-for="CourseId" />
+    <input type="hidden" asp-for="TeacherId" />
+    <input type="hidden" asp-for="Teacher" />
+    <input type="hidden" asp-for="Course" />
+    <input type="hidden" asp-for="Employees" />
+    <p>
+        <label asp-for="Name">Название учебной группы</label><br/>
+        <input type="text" asp-for="Name"/>
+    </p>
+    <p>
+        <input type="submit" value="Сохранить изменения"/>
+    </p>
+</form>

@@ -8,12 +8,10 @@ namespace StudyGroupEditor.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
     private readonly UniversityContext _universityContext;
     
-    public HomeController(ILogger<HomeController> logger, UniversityContext universityContext)
+    public HomeController(UniversityContext universityContext)
     {
-        _logger = logger;
         _universityContext = universityContext;
     }
     
@@ -24,13 +22,11 @@ public class HomeController : Controller
         return View(groups);
     }
 
-    public IActionResult AddGroup()
-    {
-        return RedirectToAction("Index", "AddGroup");
-    }
-    
+    // public IActionResult AddGroup()
+    // {
+    //     return RedirectToAction("Index", "AddGroup");
+    // }
 
-    
     // public IActionResult Privacy()
     // {
     //     return View();
@@ -40,5 +36,25 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    // public IActionResult EditGroup(Group group)
+    // {
+    //     return RedirectToAction("Index", "EditGroup", group);
+    // }
+    
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var group = await _universityContext.Groups.FindAsync(id);
+        if (group == null)
+        {
+            return NotFound();
+        }
+        return RedirectToAction("Index", "EditGroup", group);
     }
 }

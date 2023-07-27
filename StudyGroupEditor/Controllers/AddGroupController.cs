@@ -23,6 +23,6 @@ public class AddGroupController : Controller
     {
         _universityContext.Groups.Add(group);
         await _universityContext.SaveChangesAsync();
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "EditGroup", group);
     }
 }
