@@ -13,6 +13,6 @@ public class CreatePageModel
     
     public CreatePageModel(IEnumerable<Teacher> teachers)
     {
-        TeachersSelectList = new SelectList(teachers, "TeacherId", "Name"); //TODO: избавиться от строк
+        TeachersSelectList = new SelectList(teachers, "TeacherId", "Name");
     }
 }

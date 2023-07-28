@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudyGroupEditor.Models.DatabaseModels;
-using StudyGroupEditor.Models.ViewModels;
 
 namespace StudyGroupEditor.Controllers;
 
@@ -14,9 +13,32 @@ public class EditGroupController : Controller
         _universityContext = universityContext;
     }
     
-    public IActionResult Index(Group group)
+    // public IActionResult Index(Group group)
+    // {
+    //     //return View(new EditGroupModel(group));
+    //     return View(group);
+    // }
+    public async Task<IActionResult> Index(int? id)
     {
-        //return View(new EditGroupModel(group));
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var groups = 
+            await _universityContext.Groups
+                .Include(g => g.Teacher)
+                .Include(g => g.Employees)
+                .ThenInclude(e => e.Organization)
+                .ToListAsync();
+        
+        var group = groups.FirstOrDefault(g => g.GroupId == id.Value);
+        
+        if (group == null)
+        {
+            return NotFound();
+        }
+        
         return View(group);
     }
 
@@ -78,5 +100,20 @@ public class EditGroupController : Controller
     private bool GroupExists(int groupGroupId)
     {
         return true;
+    }
+    
+    public async Task<IActionResult> DeleteStudent(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var group = await _universityContext.Groups.FindAsync(id);
+        if (group == null)
+        {
+            return NotFound();
+        }
+        return RedirectToAction("Index", "EditGroup", group);
     }
 }

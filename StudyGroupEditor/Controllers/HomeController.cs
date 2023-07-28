@@ -18,7 +18,10 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var groups = 
-            await _universityContext.Groups.Include(g => g.Teacher).ToListAsync();
+            await _universityContext.Groups
+                .Include(g => g.Teacher)
+                .Include(g => g.Employees)
+                .ToListAsync();
         return View(groups);
     }
 
@@ -50,11 +53,19 @@ public class HomeController : Controller
             return NotFound();
         }
 
-        var group = await _universityContext.Groups.FindAsync(id);
+        var groups = 
+            await _universityContext.Groups
+                .Include(g => g.Teacher)
+                .Include(g => g.Employees)
+                .ToListAsync();
+        
+        var group = groups.FirstOrDefault(g => g.GroupId == id.Value);
+        
         if (group == null)
         {
             return NotFound();
         }
+        
         return RedirectToAction("Index", "EditGroup", group);
     }
 }

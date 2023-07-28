@@ -20,9 +20,10 @@
                 <td>@item.Teacher.Name</td>
                 <td>@item.Employees.Count</td>
                 
-                <td> <form method="post">
-                        <a asp-action="Edit" asp-route-id="@item.GroupId">Редактировать</a>
-                    </form></td>
+                <td> <form method="post" >
+                    @* <a asp-action="Edit" asp-route-id="@item.GroupId">Редактировать</a> *@
+                    <a asp-controller="EditGroup" asp-action="Index" asp-route-id="@item.GroupId">Редактировать</a>
+                </form></td>
             </tr>
         }
     </table>

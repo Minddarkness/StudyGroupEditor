@@ -1,0 +1,43 @@
+@model StudyGroupEditor.Models.ViewModels.AddStudentPageModel
+
+<h1 class="display-4">Создать учебную группу</h1>
+<h2>Учебные группы > Добавить студента в учебную группу</h2>
+<p>
+    <label> @("Учебная группа: " + Model.Group.Name) </label><br/>
+    <label> @("Преподаватель: " + Model.Group.Teacher.Name) </label><br/>
+    <form method="post" asp-action="AddStudent" asp-controller="AddStudent">
+        <p>
+            <label asp-for="Employee.Organization.OrganizationId">Организация</label><br />
+            <select id="organisation" asp-for="Employee.Organization.OrganizationId" asp-items="Model.OrganizationsSelectList"></select>
+        </p>
+        <p>
+            <label asp-for="Employee.EmployeeId">Сотрудник</label><br />
+            <select id="employee" asp-for="Employee.EmployeeId" asp-items="Model.EmployeesSelectList"></select>
+        </p>
+        <p>
+            <input type="submit" value="Создать"/>
+        </p>
+    </form>
+</p>
+
+@section scripts{
+    <script type="text/javascript">
+    $(function () {
+     
+        $('#organisation').change(function()
+        {
+            // получаем выбранный id
+            var id = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetEmployees")/' + id,
+                success: function (data) {
+                     
+                    // заменяем содержимое присланным частичным представлением
+                    $('#employee').replaceWith(data);
+                }
+            });
+        });
+    })
+</script>
+}

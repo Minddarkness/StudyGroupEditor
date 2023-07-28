@@ -1,4 +1,5 @@
 @* @model StudyGroupEditor.Models.ViewModels.EditGroupModel *@
+@using StudyGroupEditor.Controllers
 @model StudyGroupEditor.Models.DatabaseModels.Group
 <h1 class="display-4">Создать учебную группу</h1>
 <h2>Учебные группы > Создать учебную группу</h2>
@@ -20,3 +21,21 @@
         <input type="submit" value="Сохранить изменения"/>
     </p>
 </form>
+<table class="table">
+    <tr>
+        <th>Студент</th>
+        <th>Организация</th>
+        <th></th>
+    </tr>
+    @foreach (var employee in Model.Employees)
+    {
+        <tr>
+            <td>@employee.Name</td>
+            <td>@employee.Organization.Name</td>
+            <td> <form method="post">
+                <a asp-action="DeleteStudent" asp-route-id="@employee.EmployeeId">Удалить из группы</a>
+            </form></td>
+        </tr>
+    }
+</table>
+<a asp-controller="AddStudent" asp-action="Index" asp-route-id="@Model.GroupId">Добавить студента в учебную группу</a>

@@ -1,0 +1,9 @@
+@model IEnumerable<StudyGroupEditor.Models.DatabaseModels.Employee>
+
+<select id="employee" name="Employee">
+    @foreach (var item in Model)
+    {
+        <option value="@item.EmployeeId">@item.Name</option>
+    }
+</select>
+

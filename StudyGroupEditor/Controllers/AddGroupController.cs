@@ -19,7 +19,7 @@ public class AddGroupController : Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateGroup(Group group)
+    public async Task<IActionResult> CreateGroup(Group group, Employee employee)
     {
         _universityContext.Groups.Add(group);
         await _universityContext.SaveChangesAsync();
